@@ -1,9 +1,18 @@
-const App = () => {
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function App() {
   return (
-    <div>
-      <h1>blogging app mern</h1>
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   );
-};
+}
 
 export default App;
