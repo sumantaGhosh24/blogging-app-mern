@@ -1,0 +1,29 @@
+.body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.not-found-container {
+  padding: 200px;
+}
+.not-found-container h1 {
+  font-size: 80px;
+  margin-bottom: 20px;
+  color: #ff5252;
+}
+.not-found-container p {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.not-found-link {
+  color: #ff5252;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.not-found-link:hover {
+  color: #e06000;
+}

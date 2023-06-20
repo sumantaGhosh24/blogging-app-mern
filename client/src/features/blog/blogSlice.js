@@ -132,23 +132,6 @@ export const deleteBlog = createAsyncThunk(
   }
 );
 
-export const searchBlogs = createAsyncThunk(
-  "blog/searchBlogs",
-  async (data, thunkAPI) => {
-    try {
-      return await blogService.searchBlogs(data);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
 export const blogSlice = createSlice({
   name: "blog",
   initialState,
@@ -247,19 +230,6 @@ export const blogSlice = createSlice({
         );
       })
       .addCase(deleteBlog.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
-      .addCase(searchBlogs.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(searchBlogs.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.blogs = action.payload;
-      })
-      .addCase(searchBlogs.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -60,11 +60,6 @@ const deleteBlog = async (id, token) => {
   return response.data;
 };
 
-const searchBlogs = async (data) => {
-  const response = await axios.get(`${API_URL}/search/blogs?title=${data}`);
-  return response.data;
-};
-
 const blogService = {
   createBlog,
   getHomeBlogs,
@@ -73,7 +68,6 @@ const blogService = {
   getBlog,
   updateBlog,
   deleteBlog,
-  searchBlogs,
 };
 
 export default blogService;

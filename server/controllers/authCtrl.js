@@ -6,7 +6,7 @@ import User from "../models/userModel.js";
 const authCtrl = {
   register: async (req, res) => {
     try {
-      const {name, email, password} = req.body;
+      const {name, email, password, avatar} = req.body;
       if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
         return res
           .status(400)
@@ -26,6 +26,7 @@ const authCtrl = {
         name: name.toLowerCase(),
         email,
         password: passwordHash,
+        avatar,
       });
       await newUser.save();
       return res.status(201).json({message: "User registration successful!"});
@@ -39,13 +40,13 @@ const authCtrl = {
       if (!email || !password) {
         return res.status(400).json({message: "All fields are required."});
       }
-      const foundUser = await User.findOne({account});
+      const foundUser = await User.findOne({email});
       if (!foundUser) {
         return res.status(401).json({message: "This account does not exits."});
       }
       const isMatch = await bcrypt.compare(password, foundUser.password);
       if (!isMatch) {
-        return res.status(401).json({message: "Unauthorized"});
+        return res.status(401).json({message: "Invalid user credentials."});
       }
       const accessToken = jwt.sign(
         {
@@ -63,10 +64,10 @@ const authCtrl = {
         process.env.REFRESH_TOKEN_SECRET,
         {expiresIn: "7d"}
       );
-      res.cookie("refreshtoken", refreshToken, {
+      res.cookie("jwt", refreshToken, {
         httpOnly: true,
+        secure: true,
         maxAge: 7 * 24 * 60 * 60 * 1000,
-        path: "/api/refresh_token",
       });
       return res.json({accessToken});
     } catch (error) {
@@ -76,9 +77,9 @@ const authCtrl = {
   refreshToken: async (req, res) => {
     try {
       const cookies = req.cookies;
-      if (!cookies?.refreshtoken)
+      if (!cookies?.jwt)
         return res.status(401).json({message: "Unauthorized!"});
-      const refreshToken = cookies.refreshtoken;
+      const refreshToken = cookies.jwt;
       jwt.verify(
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
@@ -109,8 +110,8 @@ const authCtrl = {
   logout: async (req, res) => {
     try {
       const cookies = req.cookies;
-      if (!cookies?.refreshtoken) return res.sendStatus(204);
-      res.clearCookie("refreshtoken", {path: "/api/refresh_token"});
+      if (!cookies?.jwt) return res.sendStatus(204);
+      res.clearCookie("jwt", {httpOnly: true});
       return res.json({message: "Logged out!"});
     } catch (error) {
       return res.status(500).json({message: error.message});

@@ -2,10 +2,8 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
 import authService from "./authService";
 
-const user = JSON.parse(localStorage.getItem("user"));
-
 const initialState = {
-  user: user ? user : null,
+  user: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -28,20 +26,6 @@ export const register = createAsyncThunk(
     }
   }
 );
-
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
-// get cookie in react frontend
 
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   try {
@@ -108,7 +92,7 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.message = action.payload;
       })
       .addCase(register.rejected, (state, action) => {
         state.isLoading = false;
