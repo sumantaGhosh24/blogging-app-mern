@@ -34,4 +34,6 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
+blogSchema.index({title: "text"});
+
 export default mongoose.model("blog", blogSchema);

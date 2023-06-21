@@ -1,0 +1,61 @@
+.card {
+  width: 300px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.card h2 {
+  text-transform: capitalize;
+  margin-bottom: 15px;
+}
+.card p {
+  margin-bottom: 15px;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.time {
+  font-weight: bolder;
+  font-size: 18px;
+}
+.btn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.5s ease-in-out;
+}
+.btn-update {
+  background-color: rgb(0, 81, 255);
+  color: white;
+}
+.btn-update:hover {
+  background-color: rgb(31, 101, 251);
+}
+.btn-delete {
+  background-color: rgb(255, 0, 0);
+  color: white;
+}
+.btn-delete:hover {
+  background-color: rgb(251, 57, 57);
+}
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 20px);
+  }
+}
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
+}

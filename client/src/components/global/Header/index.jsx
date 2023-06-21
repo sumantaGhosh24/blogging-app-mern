@@ -1,12 +1,12 @@
 import {useState, useEffect} from "react";
 import {Link, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import axios from "axios";
-import {toast} from "react-toastify";
 
 import "./style.css";
 import {logout} from "../../../features/auth/authSlice";
 import {useAuth} from "../../../hooks";
+import {CardHoriz, Loading} from "../../";
+import {searchBlog} from "../../../features/blog/blogSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -33,31 +33,26 @@ const Navbar = () => {
     dispatch(logout());
   };
 
+  const {searchBlogs, isLoading} = useSelector((state) => state.blog);
+
   const [search, setSearch] = useState("");
-  const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     const delayDebounce = setTimeout(async () => {
-      if (search.length < 2) return setBlogs([]);
-      try {
-        const response = await axios.get(
-          `http://localhost:8080/api/search/blogs?title=${search}`
-        );
-        setBlogs(response.data);
-      } catch (error) {
-        toast.error(error.message);
-      }
+      if (search.length < 2) return;
+      dispatch(searchBlog(search));
     }, 400);
 
     return () => clearTimeout(delayDebounce);
   }, [search]);
 
-  console.log("blogs", blogs);
-
   useEffect(() => {
     setSearch("");
-    setBlogs([]);
   }, [pathname]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -97,14 +92,20 @@ const Navbar = () => {
           />
         </form>
       </nav>
-      <div>
-        {/* {search.length >= 2 && (
+      <div className="search-blog-container">
+        {search.length >= 2 && (
           <div>
-            {blogs.length ? (
-              blogs.map(blog => <CardHoriz key={blog._id} blog={blog} />)
-            ) : (<h3>No blog found</h3>)}
+            {searchBlogs.length ? (
+              <div className="search-blogs">
+                {searchBlogs?.map((blog) => (
+                  <CardHoriz key={blog._id} blog={blog} search={search} />
+                ))}
+              </div>
+            ) : (
+              <h3 className="search-blog-error">No blog found</h3>
+            )}
           </div>
-        )} */}
+        )}
       </div>
     </>
   );

@@ -8,14 +8,14 @@ const useAuth = () => {
 
   if (user) {
     const decoded = jwtDecode(user.accessToken);
-    const {email, _id, role} = decoded.UserInfo;
-    return {user, email, _id, role, isLoading, isError, isSuccess, message};
+    const {email, id, role} = decoded.UserInfo;
+    return {user, email, id, role, isLoading, isError, isSuccess, message};
   }
 
   return {
     user,
     email: "",
-    _id: "",
+    id: "",
     role: "",
     isLoading,
     isError,

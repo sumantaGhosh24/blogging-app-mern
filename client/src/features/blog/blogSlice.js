@@ -4,6 +4,7 @@ import blogService from "./blogService";
 
 const initialState = {
   blogs: [],
+  searchBlogs: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -118,8 +119,25 @@ export const deleteBlog = createAsyncThunk(
   "blog/delete",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user.accessToken;
       return await blogService.deleteBlog(id, token);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const searchBlog = createAsyncThunk(
+  "blog/searchBlog",
+  async (search, thunkAPI) => {
+    try {
+      return await blogService.searchBlog(search);
     } catch (error) {
       const message =
         (error.response &&
@@ -136,7 +154,12 @@ export const blogSlice = createSlice({
   name: "blog",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -225,14 +248,19 @@ export const blogSlice = createSlice({
       .addCase(deleteBlog.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.blogs = state.blogs.filter(
-          (blog) => blog._id !== action.payload.id
-        );
+        state.message = action.payload;
       })
       .addCase(deleteBlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
+      })
+      .addCase(searchBlog.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(searchBlog.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.searchBlogs = action.payload;
       });
   },
 });

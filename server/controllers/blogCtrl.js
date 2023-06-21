@@ -224,7 +224,7 @@ const blogCtrl = {
     try {
       const blog = await Blog.findOneAndDelete({
         _id: req.params.id,
-        user: req.user._id,
+        user: req.id,
       });
       if (!blog)
         return res.status(400).json({message: "This blog is not exists."});
@@ -236,29 +236,9 @@ const blogCtrl = {
   },
   searchBlogs: async (req, res) => {
     try {
-      const blogs = await Blog.aggregate([
-        {
-          $search: {
-            index: "searchTitle",
-            autocomplete: {
-              query: `${req.query.title}`,
-              path: "title",
-            },
-          },
-        },
-        {$sort: {createdAt: -1}},
-        {$limit: 5},
-        {
-          $project: {
-            title: 1,
-            description: 1,
-            thumbnail: 1,
-            createdAt: 1,
-          },
-        },
-      ]);
-      if (!blogs.length)
-        return res.status(400).json({message: "No blog found."});
+      const blogs = await Blog.find({$text: {$search: req.query.title}}).limit(
+        5
+      );
       return res.json(blogs);
     } catch (error) {
       return res.status(500).json({message: error.message});

@@ -6,7 +6,16 @@ import {useDispatch} from "react-redux";
 
 import {refreshToken} from "./features/auth/authSlice";
 import {Header, Footer, NotFound} from "./components";
-import {Category, CreateBlog, Home, Login, Profile, Register} from "./pages";
+import {
+  Blog,
+  Category,
+  CreateBlog,
+  Home,
+  Login,
+  Profile,
+  Register,
+  UpdateBlog,
+} from "./pages";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +36,8 @@ function App() {
           <Route path="/category" element={<Category />} />
           <Route path="/create_blog" element={<CreateBlog />} />
           <Route path="/profile/:id" element={<Profile />} />
+          <Route path="/blog/:id" element={<Blog />} />
+          <Route path="/update_blog/:id" element={<UpdateBlog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
