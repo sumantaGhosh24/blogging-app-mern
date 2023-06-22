@@ -4,3 +4,4 @@ export {default as Header} from "./global/Header";
 export {default as Footer} from "./global/Footer";
 
 export {default as CardHoriz} from "./card/CardHoriz";
+export {default as CardVert} from "./card/CardVert";

@@ -7,6 +7,7 @@ import "./style.css";
 import {useAuth} from "../../../hooks";
 import {deleteBlog, reset, searchBlog} from "../../../features/blog/blogSlice";
 import {Loading} from "../../";
+import {getWordStr} from "../../../lib";
 
 const CardHoriz = ({blog, search}) => {
   const {_id, user, title, description, createdAt, thumbnail} = blog;
@@ -69,9 +70,9 @@ const CardHoriz = ({blog, search}) => {
           </>
         )}
         <h2>
-          <Link to={`/blog/${_id}`}>{title}</Link>
+          <Link to={`/blog/${_id}`}>{getWordStr(title)}</Link>
         </h2>
-        <p>{description}</p>
+        <p>{getWordStr(description, 40)}</p>
         {authUser && user === userId && (
           <>
             <Link to={`/update_blog/${_id}`} className="btn btn-update">

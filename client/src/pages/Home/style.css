@@ -1,0 +1,31 @@
+.home {
+  width: 95%;
+  margin: 0 auto;
+}
+.home-container {
+  margin-block: 25px;
+}
+.container-heading {
+  font-size: 28px;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+.container-heading small {
+  color: blue;
+  font-size: 20px;
+}
+.hr {
+  margin-bottom: 10px;
+}
+.blog-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.read-more {
+  margin-left: 25px;
+  font-size: 20px;
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -5,6 +5,7 @@ import blogService from "./blogService";
 const initialState = {
   blogs: [],
   searchBlogs: [],
+  homeBlogs: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -181,13 +182,7 @@ export const blogSlice = createSlice({
       })
       .addCase(getHomeBlogs.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.blogs = action.payload;
-      })
-      .addCase(getHomeBlogs.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
+        state.homeBlogs = action.payload;
       })
       .addCase(getBlogsByCategory.pending, (state) => {
         state.isLoading = true;

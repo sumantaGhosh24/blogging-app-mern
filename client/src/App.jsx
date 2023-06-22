@@ -9,6 +9,7 @@ import {Header, Footer, NotFound} from "./components";
 import {
   Blog,
   Category,
+  CategoryBlog,
   CreateBlog,
   Home,
   Login,
@@ -38,6 +39,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/update_blog/:id" element={<UpdateBlog />} />
+          <Route path="/blogs/:id" element={<CategoryBlog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

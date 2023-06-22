@@ -6,3 +6,4 @@ export {default as CreateBlog} from "./CreateBlog";
 export {default as Profile} from "./Profile";
 export {default as Blog} from "./Blog";
 export {default as UpdateBlog} from "./UpdateBlog";
+export {default as CategoryBlog} from "./CategoryBlog";

@@ -7,6 +7,7 @@ import "./style.css";
 import {Loading} from "../../components";
 import {reset, register} from "../../features/auth/authSlice";
 import {useTitle, useAuth} from "../../hooks";
+import {convertToBase64} from "../../lib";
 
 const Register = () => {
   useTitle("Register User");
@@ -154,16 +155,3 @@ const Register = () => {
 };
 
 export default Register;
-
-function convertToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-}

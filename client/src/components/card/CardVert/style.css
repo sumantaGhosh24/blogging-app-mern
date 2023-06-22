@@ -1,0 +1,44 @@
+.card {
+  width: 300px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+h5,
+p {
+  margin-bottom: 15px;
+}
+.card-heading {
+  text-transform: capitalize;
+  font-size: 24px;
+}
+.card-paragraph {
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+.time {
+  font-weight: bolder;
+  font-size: 18px;
+}
+.user {
+  font-weight: bold;
+  font-size: 18px;
+}
+@media (max-width: 768px) {
+  .card {
+    width: calc(50% - 20px);
+  }
+}
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
+}

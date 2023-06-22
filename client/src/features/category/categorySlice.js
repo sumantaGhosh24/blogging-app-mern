@@ -95,7 +95,7 @@ export const categorySlice = createSlice({
       .addCase(createCategory.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.category.push(action.payload);
+        state.message = action.payload;
       })
       .addCase(createCategory.rejected, (state, action) => {
         state.isLoading = false;
@@ -121,8 +121,7 @@ export const categorySlice = createSlice({
       .addCase(updateCategory.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.category.filter((category) => category._id !== action.payload.id);
-        state.category.push(action.payload);
+        state.message = action.payload;
       })
       .addCase(updateCategory.rejected, (state, action) => {
         state.isLoading = false;
@@ -135,9 +134,7 @@ export const categorySlice = createSlice({
       .addCase(deleteCategory.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.category = state.category.filter(
-          (category) => category._id !== action.payload.id
-        );
+        state.message = action.payload;
       })
       .addCase(deleteCategory.rejected, (state, action) => {
         state.isLoading = false;
