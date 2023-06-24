@@ -14,7 +14,7 @@ export const createCategory = createAsyncThunk(
   "category/create",
   async (categoryData, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user.accessToken;
       return await categoryService.createCategory(categoryData, token);
     } catch (error) {
       const message =
@@ -49,8 +49,8 @@ export const updateCategory = createAsyncThunk(
   "category/update",
   async (data, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-      return await categoryService.updateCategory(data.id, data, token);
+      const token = thunkAPI.getState().auth.user.accessToken;
+      return await categoryService.updateCategory(data._id, data.name, token);
     } catch (error) {
       const message =
         (error.response &&
@@ -67,7 +67,7 @@ export const deleteCategory = createAsyncThunk(
   "category/delete",
   async (id, thunkAPI) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
+      const token = thunkAPI.getState().auth.user.accessToken;
       return await categoryService.deleteCategory(id, token);
     } catch (error) {
       const message =
@@ -85,7 +85,12 @@ export const categorySlice = createSlice({
   name: "category",
   initialState,
   reducers: {
-    reset: (state) => initialState,
+    reset: (state) => {
+      state.isError = false;
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -107,7 +112,6 @@ export const categorySlice = createSlice({
       })
       .addCase(getCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
         state.category = action.payload;
       })
       .addCase(getCategory.rejected, (state, action) => {

@@ -15,7 +15,7 @@ const blogCtrl = {
     try {
       const {title, content, description, thumbnail, category} = req.body;
       const newBlog = new Blog({
-        user: req.user._id,
+        user: req.id,
         title: title.toLowerCase(),
         content,
         description,
@@ -209,7 +209,7 @@ const blogCtrl = {
       const blog = await Blog.findOneAndUpdate(
         {
           _id: req.params.id,
-          user: req.user._id,
+          user: req.id,
         },
         req.body
       );

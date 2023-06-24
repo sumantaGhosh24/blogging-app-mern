@@ -17,12 +17,14 @@ import {
   Register,
   UpdateBlog,
 } from "./pages";
+import {getCategory} from "./features/category/categorySlice";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(refreshToken());
+    dispatch(getCategory());
   }, [dispatch]);
 
   return (

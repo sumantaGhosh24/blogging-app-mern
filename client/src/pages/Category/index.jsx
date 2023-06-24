@@ -1,30 +1,59 @@
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 import "./style.css";
-import {NotFound} from "../../components";
+import {Loading} from "../../components";
 import {
   createCategory,
   deleteCategory,
   getCategory,
+  reset,
   updateCategory,
 } from "../../features/category/categorySlice";
-import {useAuth} from "../../hooks";
+import {useAuth, useTitle} from "../../hooks";
 
 const Category = () => {
+  useTitle("Manage Category");
+
   const [name, setName] = useState("");
   const [edit, setEdit] = useState(null);
 
   const {user, role} = useAuth();
+
   const {category, isSuccess, isLoading, isError, message} = useSelector(
     (state) => state.category
   );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getCategory());
-  }, [dispatch]);
+    if (isError) {
+      if (typeof message === "object") {
+        toast.error(message.message || "something went wrong");
+      } else {
+        toast.error(message || "something went wrong");
+      }
+    }
+    if (isSuccess) {
+      if (typeof message === "object") {
+        toast.success(message.message || "success");
+      } else {
+        toast.success(message || "success");
+      }
+      dispatch(getCategory());
+      setName("");
+    }
+    if (!user) {
+      navigate("/login");
+    }
+    if (role !== "admin") {
+      navigate("/");
+    }
+    dispatch(reset());
+  }, [user, category, isError, isSuccess, message, navigate, dispatch]);
 
   useEffect(() => {
     if (edit) setName(edit.name);
@@ -38,9 +67,10 @@ const Category = () => {
     if (edit) {
       if (edit.name === name) return;
       const data = {...edit, name};
-      dispatch(updateCategory(data, user.accessToken));
+      dispatch(updateCategory(data));
     } else {
-      dispatch(createCategory(name, user.accessToken));
+      dispatch(createCategory({name}));
+      dispatch(getCategory());
     }
     setName("");
     setEdit(null);
@@ -49,19 +79,26 @@ const Category = () => {
   const handleDelete = (id) => {
     if (!user.accessToken) return;
     if (window.confirm("Are you sure you want to delete this category?")) {
-      dispatch(deleteCategory(id, user.accessToken));
+      dispatch(deleteCategory(id));
     }
   };
 
-  if (role !== "admin") return <NotFound />;
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
-      <div>
+      <div className="categoryForm-container">
+        <h2>{edit ? "Update" : "Create"} Category</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="category">Category</label>
-          <div>
-            {edit && <p onClick={() => setEdit(null)}>X</p>}
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            {edit && (
+              <p className="close-btn" onClick={() => setEdit(null)}>
+                X
+              </p>
+            )}
             <input
               type="text"
               name="category"
@@ -69,20 +106,49 @@ const Category = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <button type="submit">{edit ? "Update" : "Create"}</button>
           </div>
+          <button
+            type="submit"
+            className={edit ? "btn update-btn" : "btn create-btn"}
+          >
+            {edit ? "Update" : "Create"}
+          </button>
         </form>
-        <div>
-          {category.map((category) => (
-            <div key={category._id}>
-              <p>{category.name}</p>
-              <div>
-                <p onClick={() => setEdit(category)}>Edit</p>
-                <p onClick={() => handleDelete(category._id)}>Delete</p>
-              </div>
-            </div>
-          ))}
-        </div>
+      </div>
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>CreatedAt</th>
+              <th>UpdatedAt</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {category.map((category) => (
+              <tr key={category._id}>
+                <td>{category.name}</td>
+                <td>{category.createdAt}</td>
+                <td>{category.updatedAt}</td>
+                <td>
+                  <button
+                    className="btn update-btn"
+                    onClick={() => setEdit(category)}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    className="btn delete-btn"
+                    onClick={() => handleDelete(category._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );

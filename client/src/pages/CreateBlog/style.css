@@ -1,0 +1,43 @@
+.form-container {
+  min-width: 400px;
+  max-width: 750px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.form-container h2,
+.preview-container h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+.preview-container .card {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+.text-length {
+  font-size: 18px;
+  margin-left: 100px;
+}
+.blog-btn {
+  margin: 0 auto;
+  margin-bottom: 25px;
+  padding: 12px 16px;
+  border: none;
+  outline: none;
+  background: green;
+  color: white;
+  border-radius: 10px;
+  font-size: 18px;
+  display: block;
+  cursor: pointer;
+}
+.blog-preview {
+  width: 95%;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin-bottom: 10px;
+}

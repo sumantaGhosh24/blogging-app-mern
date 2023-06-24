@@ -5,3 +5,6 @@ export {default as Footer} from "./global/Footer";
 
 export {default as CardHoriz} from "./card/CardHoriz";
 export {default as CardVert} from "./card/CardVert";
+
+export {default as CreateForm} from "./blog/CreateForm";
+export {default as ReactQuill} from "./blog/ReactQuill";

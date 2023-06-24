@@ -62,7 +62,7 @@ const CardHoriz = ({blog, search}) => {
           <>
             {typeof thumbnail === "string" ? (
               <Link to={`/blog/${_id}`}>
-                {/* <img src={thumbnail} alt={title} /> */}
+                <img src={thumbnail} alt={title} />
               </Link>
             ) : (
               <img src={URL.createObjectURL(thumbnail)} alt={title} />

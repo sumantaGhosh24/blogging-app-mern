@@ -2,17 +2,13 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/api";
 
-const createCategory = async (categoryData, token) => {
+const createCategory = async (nam, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.post(
-    `${API_URL}/category`,
-    categoryData,
-    config
-  );
+  const response = await axios.post(`${API_URL}/category`, nam, config);
   return response.data;
 };
 
@@ -21,30 +17,27 @@ const getCategory = async () => {
   return response.data;
 };
 
-const updateCategory = async (categoryId, categoryData, token) => {
+const updateCategory = async (id, name, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
   const response = await axios.patch(
-    `${API_URL}/category/${categoryId}`,
-    categoryData,
+    `${API_URL}/category/${id}`,
+    {name},
     config
   );
   return response.data;
 };
 
-const deleteCategory = async (categoryId, token) => {
+const deleteCategory = async (id, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  const response = await axios.delete(
-    `${API_URL}/category/${categoryId}`,
-    config
-  );
+  const response = await axios.delete(`${API_URL}/category/${id}`, config);
   return response.data;
 };
 
