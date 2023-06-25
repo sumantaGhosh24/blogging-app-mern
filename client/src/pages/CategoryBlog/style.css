@@ -1,0 +1,13 @@
+.category-pagination-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+.category-blogs {
+  display: flex;
+  flex-wrap: wrap;
+}
+h2 {
+  text-align: center;
+  font-size: 32px;
+}

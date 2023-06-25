@@ -6,12 +6,16 @@ const userCtrl = {
       return res.status(400).json({message: "Invalid authentication."});
     }
     try {
-      const {avatar, name} = req.body;
+      const {avatar, name, email} = req.body;
+      if (!avatar || !name || !email) {
+        return res.status(400).json({message: "Please fill all fields."});
+      }
       await User.findOneAndUpdate(
-        {_id: req.user._id},
+        {_id: req.id},
         {
           avatar,
           name,
+          email,
         }
       );
       return res.json({message: "User update success!"});

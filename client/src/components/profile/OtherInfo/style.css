@@ -1,0 +1,21 @@
+h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+.user-image {
+  height: 400px;
+  width: 100%;
+}
+.user-role,
+.user-name,
+.user-email,
+.user-date {
+  font-size: 28px;
+  margin-top: 25px;
+}
+.user-name span,
+.user-email span,
+.user-date span {
+  font-weight: normal;
+}

@@ -6,6 +6,9 @@ const initialState = {
   blogs: [],
   searchBlogs: [],
   homeBlogs: [],
+  userBlogs: [],
+  categoryBlogs: [],
+  blog: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -189,8 +192,7 @@ export const blogSlice = createSlice({
       })
       .addCase(getBlogsByCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.blogs = action.payload;
+        state.categoryBlogs = action.payload;
       })
       .addCase(getBlogsByCategory.rejected, (state, action) => {
         state.isLoading = false;
@@ -202,8 +204,7 @@ export const blogSlice = createSlice({
       })
       .addCase(getBlogsByUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
-        state.blogs = action.payload;
+        state.userBlogs = action.payload;
       })
       .addCase(getBlogsByUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -215,11 +216,12 @@ export const blogSlice = createSlice({
       })
       .addCase(getBlog.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.blogs = action.payload;
+        state.blog = action.payload;
       })
       .addCase(getBlog.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
+        state.blog = null;
         state.message = action.payload;
       })
       .addCase(updateBlog.pending, (state) => {

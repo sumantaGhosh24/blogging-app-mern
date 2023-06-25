@@ -79,50 +79,11 @@ const blogCtrl = {
   getBlogsByCategory: async (req, res) => {
     const {limit, skip} = Pagination(req);
     try {
-      const Data = await Blog.aggregate([
-        {
-          $facet: {
-            totalData: [
-              {
-                $match: {
-                  category: mongoose.Types.ObjectId(req.params.id),
-                },
-              },
-              {
-                $lookup: {
-                  from: "users",
-                  let: {user_id: "$user"},
-                  pipeline: [
-                    {$match: {$expr: {$eq: ["$_id", "$$user_id"]}}},
-                    {$project: {password: 0}},
-                  ],
-                  as: "user",
-                },
-              },
-              {$unwind: "$user"},
-              {$sort: {createdAt: -1}},
-              {$skip: skip},
-              {$limit: limit},
-            ],
-            totalCount: [
-              {
-                $match: {
-                  category: mongoose.Types.ObjectId(req.params.id),
-                },
-              },
-              {$count: "count"},
-            ],
-          },
-        },
-        {
-          $project: {
-            count: {$arrayElemAt: ["$totalCount.count", 0]},
-            totalData: 1,
-          },
-        },
-      ]);
-      const blogs = Data[0].totalData;
-      const count = Data[0].count;
+      const blogs = await Blog.find({category: req.params.id})
+        .limit(limit)
+        .skip(skip);
+      const totalBlogs = await Blog.find({category: req.params.id});
+      const count = totalBlogs.length;
       let total = 0;
       if (count % limit === 0) {
         total = count / limit;
@@ -137,50 +98,13 @@ const blogCtrl = {
   getBlogsByUser: async (req, res) => {
     const {limit, skip} = Pagination(req);
     try {
-      const Data = await Blog.aggregate([
-        {
-          $facet: {
-            totalData: [
-              {
-                $match: {
-                  user: mongoose.Types.ObjectId(req.params.id),
-                },
-              },
-              {
-                $lookup: {
-                  from: "users",
-                  let: {user_id: "$user"},
-                  pipeline: [
-                    {$match: {$expr: {$eq: ["$_id", "$$user_id"]}}},
-                    {$project: {password: 0}},
-                  ],
-                  as: "user",
-                },
-              },
-              {$unwind: "$user"},
-              {$sort: {createdAt: -1}},
-              {$skip: skip},
-              {$limit: limit},
-            ],
-            totalCount: [
-              {
-                $match: {
-                  user: mongoose.Types.ObjectId(req.params.id),
-                },
-              },
-              {$count: "count"},
-            ],
-          },
-        },
-        {
-          $project: {
-            count: {$arrayElemAt: ["$totalCount.count", 0]},
-            totalData: 1,
-          },
-        },
-      ]);
-      const blogs = Data[0].totalData;
-      const count = Data[0].count;
+      const blogs = await Blog.find({user: req.params.id})
+        .limit(limit)
+        .skip(skip);
+      const totalBlogs = await Blog.find({
+        user: req.params.id,
+      });
+      const count = totalBlogs.length;
       let total = 0;
       if (count % limit === 0) {
         total = count / limit;

@@ -1,0 +1,13 @@
+.userUpdate-container,
+.otherInfo-container {
+  min-width: 400px;
+  max-width: 750px;
+  margin: 100px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.userBlog-container {
+  width: 95%;
+  margin: 0 auto;
+}

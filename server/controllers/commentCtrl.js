@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
 import Comments from "../models/commentModel.js";
-// import {io} from "../server.js";
 
 const Pagination = (req) => {
   let page = Number(req.query.page) * 1 || 1;
@@ -25,7 +24,6 @@ const commentCtrl = {
         user: req.user,
         createdAt: new Date().toISOString(),
       };
-      // io.to(`${blog_id}`).emit("createComment", data);
       await newComment.save();
       return res.json({message: "New comment created!"});
     } catch (error) {
@@ -152,7 +150,6 @@ const commentCtrl = {
         reply_user: reply_user,
         createdAt: new Date().toISOString(),
       };
-      // io.to(`${blog_id}`).emit("replyComment", data);
       await newComment.save();
       return res.json(newComment);
     } catch (error) {
@@ -171,7 +168,6 @@ const commentCtrl = {
       );
       if (!comment)
         return res.status(400).json({message: "Comment does not exits."});
-      // io.to(`${data.blog_id}`).emit("updateComment", data);
       return res.json({message: "Update Success!"});
     } catch (error) {
       return res.status(500).json({message: error.message});
@@ -195,7 +191,6 @@ const commentCtrl = {
       } else {
         await Comments.deleteMany({_id: {$in: comment.replyCM}});
       }
-      // io.to(`${comment.blog_id}`).emit("deleteComment", comment);
       return res.json({message: "Delete Success!"});
     } catch (error) {
       return res.status(500).json({message: error.message});

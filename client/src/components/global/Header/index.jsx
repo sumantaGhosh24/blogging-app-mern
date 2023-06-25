@@ -12,7 +12,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const {pathname} = useLocation();
 
-  const {user, role, _id} = useAuth();
+  const {user, role, id} = useAuth();
 
   const guestLinks = [
     {label: "Login", path: "/login"},
@@ -73,7 +73,7 @@ const Navbar = () => {
           )}
           {user && (
             <>
-              <Link to={`/profile/${_id}`} className="nav-link">
+              <Link to={`/profile/${id}`} className="nav-link">
                 Profile
               </Link>
               <Link to="/" className="nav-link" onClick={handleLogout}>

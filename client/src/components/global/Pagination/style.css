@@ -1,0 +1,22 @@
+.pagination {
+  padding: 20px;
+}
+.pagination ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pagination ul li {
+  cursor: pointer;
+  background-color: white;
+  padding: 8px 12px;
+  color: green;
+  border-radius: 7px;
+  border: 1px solid green;
+  transition: all 0.7s ease;
+}
+.pagination ul li.active,
+.pagination ul li:hover {
+  background-color: green;
+  color: white;
+}
