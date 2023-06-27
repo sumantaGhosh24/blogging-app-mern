@@ -1,0 +1,23 @@
+.avatar-comment-container {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #ccc;
+  max-width: fit-content;
+  padding: 5px;
+  border-radius: 10px;
+}
+.avatar-comment-container img {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  margin-right: 15px;
+}
+.avatar-comment-link {
+  font-size: 24px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+.avatar-comment-paragraph {
+  font-weight: bold;
+}

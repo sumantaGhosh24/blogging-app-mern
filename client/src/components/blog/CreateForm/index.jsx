@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
-import {convertToBase64} from "../../../lib";
 
 import "./style.css";
+import {convertToBase64} from "../../../lib";
 
 const CreateForm = ({blog, setBlog}) => {
   const {category} = useSelector((state) => state.category);

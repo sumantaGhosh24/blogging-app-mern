@@ -6,9 +6,9 @@ import {getWordStr} from "../../../lib";
 const CardVert = ({blog}) => {
   return (
     <div className="card">
-      {/* {typeof blog.thumbnail === "string" && (
+      {typeof blog.thumbnail === "string" && (
         <img src={blog.thumbnail} alt={blog.title} />
-      )} */}
+      )}
       <div>
         <h5>
           <Link to={`/blog/${blog._id}`} className="card-heading">

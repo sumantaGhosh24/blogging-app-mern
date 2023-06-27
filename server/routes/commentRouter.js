@@ -1,18 +1,12 @@
-import express from 'express'
+import express from "express";
 
-import commentCtrl from '../controllers/commentCtrl.js'
-import auth from '../middleware/auth.js'
+import commentCtrl from "../controllers/commentCtrl.js";
+import auth from "../middleware/auth.js";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/comment', auth, commentCtrl.createComment)
+router.post("/comment", auth, commentCtrl.createComment);
 
-router.get('/comments/blog/:id', commentCtrl.getComments)
-
-router.post('/reply_comment', auth, commentCtrl.replyComment)
-
-router.patch('/comment/:id', auth, commentCtrl.updateComment)
-
-router.delete('/comment/:id', auth, commentCtrl.deleteComment)
+router.get("/comments/blog/:id", commentCtrl.getComments);
 
 export default router;

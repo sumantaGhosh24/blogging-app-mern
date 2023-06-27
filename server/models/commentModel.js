@@ -12,20 +12,6 @@ const commentSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    replyCM: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "comment",
-      },
-    ],
-    reply_user: {
-      type: mongoose.Types.ObjectId,
-      ref: "user",
-    },
-    comment_root: {
-      type: mongoose.Types.ObjectId,
-      ref: "comment",
-    },
   },
   {
     timestamps: true,

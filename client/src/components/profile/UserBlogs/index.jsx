@@ -1,6 +1,5 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigation} from "react-router-dom";
 
 import "./style.css";
 import {getBlogsByUser} from "../../../features/blog/blogSlice";

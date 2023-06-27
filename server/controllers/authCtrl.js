@@ -84,7 +84,10 @@ const authCtrl = {
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
         async (err, decoded) => {
-          if (err) return res.status(403).json({message: "Forbidden"});
+          if (err) {
+            res.clearCookie("jwt", {httpOnly: true});
+            return res.status(403).json({message: "Forbidden"});
+          }
           const foundUser = await User.findOne({email: decoded.email}).exec();
           if (!foundUser) {
             return res.status(401).json({message: "Unauthorized"});

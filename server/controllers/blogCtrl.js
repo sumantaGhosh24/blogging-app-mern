@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-
 import Blog from "../models/blogModel.js";
 import Comment from "../models/commentModel.js";
 
@@ -118,10 +116,9 @@ const blogCtrl = {
   },
   getBlog: async (req, res) => {
     try {
-      const blog = await Blog.findOne({_id: req.params.id}).populate(
-        "user",
-        "-password"
-      );
+      const blog = await Blog.findOne({_id: req.params.id})
+        .populate("user", "-password")
+        .populate("category");
       if (!blog) return res.status(400).json({message: "Blog does not exist."});
       return res.json(blog);
     } catch (error) {

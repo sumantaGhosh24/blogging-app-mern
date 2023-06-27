@@ -40,7 +40,7 @@ const CategoryBlog = () => {
       }
     }
     if (!user) {
-      navigate("/");
+      navigate("/login");
     }
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
