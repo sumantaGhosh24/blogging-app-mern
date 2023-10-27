@@ -1,3 +1,5 @@
+import propTypes from "prop-types";
+
 import {AvatarComment} from "../../";
 
 const Comments = ({comment}) => {
@@ -17,3 +19,7 @@ const Comments = ({comment}) => {
 };
 
 export default Comments;
+
+Comments.propTypes = {
+  comment: propTypes.object,
+};

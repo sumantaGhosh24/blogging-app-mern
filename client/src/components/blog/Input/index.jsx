@@ -1,4 +1,5 @@
 import {useRef, useState, useEffect} from "react";
+import propTypes from "prop-types";
 
 import "./style.css";
 import {LiteQuill} from "../../";
@@ -33,3 +34,9 @@ const Input = ({callback, edit, setEdit}) => {
 };
 
 export default Input;
+
+Input.propTypes = {
+  callback: propTypes.any,
+  edit: propTypes.any,
+  setEdit: propTypes.any,
+};

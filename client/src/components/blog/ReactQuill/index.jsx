@@ -1,5 +1,6 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import propTypes from "prop-types";
 
 import "./style.css";
 
@@ -38,3 +39,8 @@ let container = [
 ];
 
 export default Quill;
+
+Quill.propTypes = {
+  body: propTypes.string,
+  setBody: propTypes.any,
+};

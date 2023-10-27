@@ -1,4 +1,5 @@
 import {useSelector} from "react-redux";
+import propTypes from "prop-types";
 
 import "./style.css";
 import {convertToBase64} from "../../../lib";
@@ -70,3 +71,8 @@ const CreateForm = ({blog, setBlog}) => {
 };
 
 export default CreateForm;
+
+CreateForm.propTypes = {
+  blog: propTypes.object,
+  setBlog: propTypes.any,
+};

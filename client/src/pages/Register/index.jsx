@@ -25,7 +25,7 @@ const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {user, isLoading, isError, isSuccess, message} = useAuth();
+  const {isLoading, isError, isSuccess, message} = useAuth();
 
   useEffect(() => {
     if (isError) {
@@ -50,11 +50,8 @@ const Register = () => {
       });
       navigate("/login");
     }
-    if (user) {
-      navigate("/");
-    }
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
   const handleChange = (e) => {
     const {name, value} = e.target;

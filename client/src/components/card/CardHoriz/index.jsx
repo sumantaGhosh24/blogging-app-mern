@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
+import propTypes from "prop-types";
 
 import "./style.css";
 import {useAuth} from "../../../hooks";
@@ -94,3 +95,8 @@ const CardHoriz = ({blog, search}) => {
 };
 
 export default CardHoriz;
+
+CardHoriz.propTypes = {
+  blog: propTypes.object,
+  search: propTypes.string,
+};

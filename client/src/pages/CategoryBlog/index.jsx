@@ -4,7 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {toast} from "react-toastify";
 
 import "./style.css";
-import {useAuth, useTitle} from "../../hooks";
+import {useTitle} from "../../hooks";
 import {CardVert, Loading, Pagination} from "../../components";
 import {getBlogsByCategory, reset} from "../../features/blog/blogSlice";
 
@@ -14,8 +14,6 @@ const CategoryBlog = () => {
   const {categoryBlogs, isLoading, isSuccess, isError, message} = useSelector(
     (state) => state.blog
   );
-
-  const {user} = useAuth();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,11 +37,8 @@ const CategoryBlog = () => {
         toast.success(message);
       }
     }
-    if (!user) {
-      navigate("/login");
-    }
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
   useEffect(() => {
     if (!id) return;

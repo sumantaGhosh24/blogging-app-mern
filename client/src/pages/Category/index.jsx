@@ -20,7 +20,7 @@ const Category = () => {
   const [name, setName] = useState("");
   const [edit, setEdit] = useState(null);
 
-  const {user, role} = useAuth();
+  const {user} = useAuth();
 
   const {category, isSuccess, isLoading, isError, message} = useSelector(
     (state) => state.category
@@ -46,14 +46,8 @@ const Category = () => {
       dispatch(getCategory());
       setName("");
     }
-    if (!user) {
-      navigate("/login");
-    }
-    if (role !== "admin") {
-      navigate("/");
-    }
     dispatch(reset());
-  }, [user, category, isError, isSuccess, message, navigate, dispatch]);
+  }, [category, isError, isSuccess, message, navigate, dispatch]);
 
   useEffect(() => {
     if (edit) setName(edit.name);

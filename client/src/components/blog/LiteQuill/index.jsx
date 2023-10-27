@@ -1,5 +1,6 @@
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import propTypes from "prop-types";
 
 const LiteQuill = ({body, setBody}) => {
   const modules = {toolbar: {container}};
@@ -26,3 +27,8 @@ let container = [
 ];
 
 export default LiteQuill;
+
+LiteQuill.propTypes = {
+  body: propTypes.string,
+  setBody: propTypes.any,
+};

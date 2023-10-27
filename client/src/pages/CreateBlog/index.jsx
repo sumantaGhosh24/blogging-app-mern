@@ -47,11 +47,8 @@ const CreateBlog = () => {
       }
       navigate("/");
     }
-    if (!user) {
-      navigate("/login");
-    }
     dispatch(reset());
-  }, [user, isError, isSuccess, dispatch, navigate]);
+  }, [isError, isSuccess, dispatch, navigate, message]);
 
   useEffect(() => {
     const div = divRef.current;

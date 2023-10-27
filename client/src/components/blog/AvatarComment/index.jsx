@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import "./style.css";
 
@@ -17,3 +18,7 @@ const AvatarComment = ({user}) => {
 };
 
 export default AvatarComment;
+
+AvatarComment.propTypes = {
+  user: propTypes.object,
+};

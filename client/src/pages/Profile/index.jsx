@@ -12,7 +12,7 @@ const Profile = () => {
   useTitle("Profile");
 
   const {id} = useParams();
-  const {id: userId, user} = useAuth();
+  const {id: userId} = useAuth();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,11 +40,8 @@ const Profile = () => {
         toast.success(message);
       }
     }
-    if (!user) {
-      navigate("/");
-    }
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, isSuccess, message, navigate, dispatch]);
 
   if (isLoading) {
     return <Loading />;

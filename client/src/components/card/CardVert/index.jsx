@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import propTypes from "prop-types";
 
 import "./style.css";
 import {getWordStr} from "../../../lib";
@@ -36,3 +37,7 @@ const CardVert = ({blog}) => {
 };
 
 export default CardVert;
+
+CardVert.propTypes = {
+  blog: propTypes.object,
+};

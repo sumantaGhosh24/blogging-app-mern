@@ -1,3 +1,5 @@
+import propTypes from "prop-types";
+
 import "./style.css";
 
 const OtherInfo = ({users}) => {
@@ -20,3 +22,7 @@ const OtherInfo = ({users}) => {
 };
 
 export default OtherInfo;
+
+OtherInfo.propTypes = {
+  users: propTypes.any,
+};

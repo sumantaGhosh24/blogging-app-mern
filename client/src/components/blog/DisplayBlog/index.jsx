@@ -2,6 +2,7 @@ import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
+import propTypes from "prop-types";
 
 import "./style.css";
 import {useAuth} from "../../../hooks";
@@ -116,3 +117,7 @@ const DisplayBlog = ({blog}) => {
 };
 
 export default DisplayBlog;
+
+DisplayBlog.propTypes = {
+  blog: propTypes.object,
+};

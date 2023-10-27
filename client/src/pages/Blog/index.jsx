@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useAuth, useTitle} from "../../hooks";
 import {getBlog, reset} from "../../features/blog/blogSlice";
 import {DisplayBlog, Loading} from "../../components";
+import {toast} from "react-toastify";
 
 const Blog = () => {
   useTitle("Detailed Blog");
@@ -33,9 +34,6 @@ const Blog = () => {
       } else {
         toast.success(message);
       }
-    }
-    if (!user) {
-      navigate("/login");
     }
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);

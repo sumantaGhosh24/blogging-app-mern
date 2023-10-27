@@ -1,25 +1,16 @@
 import {useEffect} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 
 import "./style.css";
-import {useAuth, useTitle} from "../../hooks";
+import {useTitle} from "../../hooks";
 import {CardVert, Loading} from "../../components";
 import {getHomeBlogs} from "../../features/blog/blogSlice";
 
 const Home = () => {
   useTitle("Home");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const {user, isLoading} = useAuth();
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user, navigate]);
 
   const {homeBlogs, isLoading: blogLoading} = useSelector(
     (state) => state.blog
@@ -29,7 +20,7 @@ const Home = () => {
     dispatch(getHomeBlogs());
   }, [dispatch]);
 
-  if (isLoading || blogLoading) {
+  if (blogLoading) {
     return <Loading />;
   }
 

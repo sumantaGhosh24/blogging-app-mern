@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
+import propTypes from "prop-types";
 
 import "./style.css";
 import {getBlogsByUser} from "../../../features/blog/blogSlice";
@@ -37,3 +38,7 @@ const UserBlogs = ({id}) => {
 };
 
 export default UserBlogs;
+
+UserBlogs.propTypes = {
+  id: propTypes.string,
+};

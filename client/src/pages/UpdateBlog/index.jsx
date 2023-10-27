@@ -69,11 +69,8 @@ const UpdateBlog = () => {
       }
       navigate(`/update_blog/${id}`);
     }
-    if (!user) {
-      navigate("/login");
-    }
     dispatch(reset());
-  }, [user, isError, isSuccess, dispatch, navigate]);
+  }, [isError, isSuccess, dispatch, navigate]);
 
   useEffect(() => {
     const div = divRef.current;

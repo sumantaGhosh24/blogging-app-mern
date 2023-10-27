@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import {useSearchParams} from "react-router-dom";
+import propTypes from "prop-types";
 
 import "./style.css";
 
@@ -59,3 +60,8 @@ const Pagination = ({total, callback}) => {
 };
 
 export default Pagination;
+
+Pagination.propTypes = {
+  total: propTypes.number,
+  callback: propTypes.any,
+};
