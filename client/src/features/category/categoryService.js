@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://blogging-app-mern.onrender.com/api";
 
 const createCategory = async (nam, token) => {
   const config = {
