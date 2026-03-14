@@ -70,19 +70,6 @@ const DisplayBlog = ({blog}) => {
       <div className="detail-blog-container">
         <h2>{blog.title}</h2>
         <h3>{blog.description}</h3>
-        <h4>
-          Category: <span>{blog.category.name}</span>
-        </h4>
-        <div className="date">
-          <p>
-            Blog Posted :{" "}
-            <span>{new Date(blog.createdAt).toLocaleString()}</span>
-          </p>
-          <p>
-            Blog Updated :{" "}
-            <span>{new Date(blog.updatedAt).toLocaleString()}</span>
-          </p>
-        </div>
         <img src={blog.thumbnail} alt="thumbnail" />
         <div
           dangerouslySetInnerHTML={{__html: blog.content}}
@@ -101,6 +88,19 @@ const DisplayBlog = ({blog}) => {
           </p>
           <p>
             User since: <span>{blog.user.createdAt}</span>
+          </p>
+        </div>
+        <h4>
+          Category: <span>{blog.category.name}</span>
+        </h4>
+        <div className="date">
+          <p>
+            Blog Posted :{" "}
+            <span>{new Date(blog.createdAt).toLocaleString()}</span>
+          </p>
+          <p>
+            Blog Updated :{" "}
+            <span>{new Date(blog.updatedAt).toLocaleString()}</span>
           </p>
         </div>
       </div>

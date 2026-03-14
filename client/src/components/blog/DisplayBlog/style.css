@@ -45,9 +45,7 @@
   margin-bottom: 30px;
 }
 .detail-blog-container .content {
-  margin-bottom: 20px;
-  width: 90%;
-  margin: 0 auto;
+  margin-bottom: 40px !important;
 }
 .detail-blog-container .profile-card {
   width: 320px;
@@ -55,6 +53,7 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   margin-left: 30px;
+  margin-bottom: 20px;
 }
 .detail-blog-container .profile-card img {
   width: 100%;
